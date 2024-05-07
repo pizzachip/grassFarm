@@ -21,6 +21,8 @@ config :nerves_runtime,
      }}
 
 if Mix.target() == :test do
-  config zone_control_adapter: GrassFarm.Zones.ZoneControlAdapter.Test
+  import_config "test.exs" 
+else
+  :ok
 end
 

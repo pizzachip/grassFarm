@@ -13,4 +13,3 @@ defmodule GrassFarm.Zones.ZoneConrolAdapter do
 
   defp from_env, do: Application.get_env(:grassFarm, :zone_control_adapter)
 end
-end
