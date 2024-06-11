@@ -6,6 +6,4 @@ defmodule Sessions.Session do
   }
   defstruct [:valve_id, minutes: 12]
 
-
-
 end
