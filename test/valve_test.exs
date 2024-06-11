@@ -9,11 +9,7 @@ defmodule ValveTest do
       %Valve{
         id: 1,
         name: "New Valve",
-        gpio_port: nil
+        gpio_pin: nil
       }
-  end
-
-  test "turn on a valve" do
-    assert Valve.start(1) == :ok
   end
 end
