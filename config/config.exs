@@ -20,6 +20,12 @@ config :nerves, :firmware, rootfs_overlay: "rootfs_overlay"
 
 config :nerves, source_date_epoch: "1714758546"
 
+config :nerves_time_zones, 
+  data_dir: "./tmp/nerves_time_zones",
+  default_time_zone: "Chicago/America",
+  earliest_date: DateTime.to_unix(~U[2024-06-10 12:02:32Z]),
+  latest_date: System.os_time(:second) + 10 * 365 * 86400
+
 if Mix.target() == :host do
   import_config "host.exs"
 else
