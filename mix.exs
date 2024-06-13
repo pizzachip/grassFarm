@@ -46,7 +46,10 @@ defmodule GrassFarm.MixProject do
       {:shoehorn, "~> 0.9.1"},
       {:ring_logger, "~> 0.10.0"},
       {:toolshed, "~> 0.3.0"},
-#      {:nerves_time_zones, "~> 0.3.2"},
+      {:nerves_time_zones, "~> 0.3.2"},
+      {:tesla, "~> 1.4"},
+      {:hackney, "~> 1.17"},
+      {:jason, ">= 1.0.0"},
 
 
       # Allow Nerves.Runtime on host to support development, testing and CI.
