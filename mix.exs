@@ -58,6 +58,9 @@ defmodule GrassFarm.MixProject do
 
       # Dependencies for all targets except :host
       {:nerves_pack, "~> 0.7.0", targets: @all_targets},
+      {:livebook, "~> 0.2.0", only: [:dev, :prod]},
+      {:vega_lite, "~> 0.1.0"},
+      {:kino, "~> 0.2.3"},
 
       # Dependencies for specific targets
       # NOTE: It's generally low risk and recommended to follow minor version

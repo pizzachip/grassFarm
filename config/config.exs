@@ -22,7 +22,7 @@ config :nerves, source_date_epoch: "1714758546"
 
 config :nerves_time_zones, 
   data_dir: "./tmp/nerves_time_zones",
-  default_time_zone: "Chicago/America",
+  default_time_zone: "America/Chicago",
   earliest_date: DateTime.to_unix(~U[2024-06-10 12:02:32Z]),
   latest_date: System.os_time(:second) + 10 * 365 * 86400
 
