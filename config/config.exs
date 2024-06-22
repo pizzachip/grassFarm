@@ -26,6 +26,19 @@ config :nerves_time_zones,
   earliest_date: DateTime.to_unix(~U[2024-06-10 12:02:32Z]),
   latest_date: System.os_time(:second) + 10 * 365 * 86400
 
+config :livebook, LivebookWeb.Endpoint,
+  pubsub_server: Livebook.PubSub,
+  live_view: [signing_salt: "livebook"]
+
+config :livebook,
+  default_runtime: {Livebook.Runtime.Embedded, []},
+  authentication_mode: :password,
+  token_authentication: false,
+  password: System.get_env("LIVEBOOK_PASSWORD", "nerves"),
+  cookie: :nerves_livebook_cookie
+
+config :phoenix, :json_library, Jason
+
 if Mix.target() == :host do
   import_config "host.exs"
 else

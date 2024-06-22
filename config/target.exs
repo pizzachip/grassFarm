@@ -88,6 +88,22 @@ config :mdns_lite,
     }
   ]
 
+
+config :livebook, LivebookWeb.Endpoint,
+  url: [host: "nerves.local"],
+  http: [
+    port: "80",
+    transport_options: [socket_opts: [:inet6]]
+  ],
+  code_reloader: false,
+  server: true,
+  secret_key_base: "z9/3PbKl5GFeH3OJ8iHq7d8NyJg7SbzQ00yn5WgWlYpRCe0q0dVf4CWuqmYwgXKV"
+
+config :livebook,
+  root_path: "/data/livebooks"
+
+config :nerves_ssh,
+  user_passwords: [{"livebook", "nerves"}, {"root", "nerves"}]
 # Import target specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 # Uncomment to use target specific configurations
