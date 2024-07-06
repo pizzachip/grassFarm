@@ -43,12 +43,12 @@ defmodule WeatherClient do
     end
   end
 
-  # Helper function to parse the rainfall data from the API response
-  defp parse_rainfall(%{"hourly" => hourly_data}) do
-    hourly_data
-    |> Enum.map(&(&1["rain"]["1h"] || 0))
-    |> Enum.sum()
-    |> (&{:ok, &1}).()
-  end
+#   # Helper function to parse the rainfall data from the API response
+#   defp parse_rainfall(%{"hourly" => hourly_data}) do
+#     hourly_data
+#     |> Enum.map(&(&1["rain"]["1h"] || 0))
+#     |> Enum.sum()
+#     |> (&{:ok, &1}).()
+#   end
 end
 

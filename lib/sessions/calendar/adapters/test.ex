@@ -5,24 +5,29 @@ defmodule Sessions.CalendarAdapter.Test do
   alias Sessions.Schedule
   alias Sessions.Session
 
-  @default_minutes 12
-
-  @default_sessions [
-    %Session{valve_id: 1, minutes: @default_minutes},
-    %Session{valve_id: 2, minutes: @default_minutes},
-    %Session{valve_id: 3, minutes: @default_minutes}
-  ] 
-
   def new(adapter) do
     adapter
   end
 
   defimpl Calendar, for: Test do
-    def get_calendar(adapter) do
+    def get_calendar(_adapter) do
       # Return a test calendar gonna need a start day
       %Schedule{
         start: NaiveDateTime.add(NaiveDateTime.local_now, -3600, :second),
-        sessions: @default_sessions}
+        sessions: [
+          %Session{valve_id: 1, minutes: 12},
+          %Session{valve_id: 2, minutes: 12},
+          %Session{valve_id: 3, minutes: 12}
+        ]      
+      }
+    end 
+
+    def update_calendar(adapter) do
+      adapter
+    end 
+
+    def save_calendar(adapter) do
+      adapter
     end 
   end 
 end

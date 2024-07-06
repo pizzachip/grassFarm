@@ -26,7 +26,7 @@ defmodule Sessions.Schedule  do
 
     cond do
       past_24_rain_cm > 2 -> true
-      # past_24_avg_temp_c -> true
+      past_24_avg_temp_c -> true
       raining_now -> true
       current_temp_c < 5 -> true
       true -> false
