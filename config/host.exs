@@ -1,5 +1,7 @@
 import Config
 
+IO.inspect(Mix.target())
+IO.inspect(Mix.env())
 # Add configuration that is only needed when running on the host here.
 
 config :nerves_runtime,
@@ -20,9 +22,21 @@ config :nerves_runtime,
        "a.nerves_fw_version" => "0.0.0"
      }}
 
-if Mix.target() == :test do
-  import_config "test.exs" 
-else
-  :ok
-end
 
+adapters =
+  if Mix.env() == :test do
+    [
+      zone_control_adapter: GrassFarm.Zones.ZoneControlAdapter.Test,
+      calendar_adapter: Sessions.CalendarAdapter.Test,
+      duration_adapter: Durations.DurationAdapter.Test
+    ]
+  else 
+    [
+      zone_control_adapter: GrassFarm.Zones.ZoneControlAdapter.Dev,
+      calendar_adapter: Sessions.CalendarAdapter.Dev,
+      duration_adapter: Durations.DurationAdapter.Dev
+    ]
+  end
+
+config :grassFarm,
+   adapters 

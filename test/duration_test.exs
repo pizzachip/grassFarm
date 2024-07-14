@@ -5,22 +5,31 @@ defmodule DurationTest do
   alias Durations.Duration
   alias Durations.DurationAdapter
 
-  # I may need to change the params to reflect zulu time rather than local time depending on the API adapter
-
-  setup context do
-    [
-      params: {
-        ~N[2024-06-25 19:30:00.001], #current time
-        ~N[2024-06-26 07:00:00.001]  #start time 
-      }
-    ]
+  setup_all do
+    :ok
   end
-  
-  test "retrieve heat from api test", context do
-    IO.inspect(context.params)
-    adapter = DurationAdapter.new(context.params)
 
-    assert DurationAdapter.retrieve_heat(adapter) ==   
+  setup do
+    adapter = DurationAdapter.new(
+      %{
+         now: ~N[2024-06-25 19:30:00.001], #current time
+         watering_time: ~N[2024-06-26 07:00:00.001]  #start time 
+      }
+    )
+
+    [adapter: adapter]
+    
+  end
+
+  test "retrieve heat from api test", context do
+
+    assert DurationAdapter.retrieve_heat(context.adapter).value ==   
        [21, 22, 23, 23, 23, 24, 24, 25, 24, 24, 24, 23]
+  end
+
+  test "retrieve rain from api test", context do
+    response = DurationAdapter.retrieve_rain(context.adapter)
+    assert Enum.sum(response.value) == 1   
+    assert response.measurement_type == :rain 
   end
 end
