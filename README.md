@@ -19,6 +19,18 @@ Then, I plan to use Fuzzy Logic to implement and tune the watering process.
 3. The System will use the fuzzy logic model to determine if a watering should take place and how long each station should water
 4. The System will allow users to provide feedback like "grass is too dry" that will tune the model
 
+## Weather API
+I've chosen to use Tomorrow.io. It's free API provides the data we need and has plenty of additional options should we want to track more weather variables in the future.
+
+## Environment variables
+Include a .env in the root directory with the following values.
+Don't forget to run source .env from the root before mixing and/or deploying to the device.
+
+Variable | Value Description
+TOMORROW_APIKEY | The API key from your tomorrow.io account
+NERVES_SSID | SSID of the wifi network you plan to deploy the device in
+NERVES_PSK | Wifi network password
+
 ## Targets
 
 Nerves applications produce images for hardware targets based on the
