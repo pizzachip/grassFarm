@@ -1,4 +1,4 @@
-defmodule WeatherClientTomorrow do
+defmodule WeatherClient do
   use Tesla
 
   # Specify the base URL of the weather API
@@ -9,7 +9,7 @@ defmodule WeatherClientTomorrow do
   plug(Tesla.Middleware.JSON)
 
   plug(Tesla.Middleware.Query,
-    apikey: "",
+    apikey: Application.get_env(:grassFarm, :tomorrow_api),
     location: "33.090320,-96.914140",
     timesteps: "1h",
     units: "metric"
