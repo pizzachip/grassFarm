@@ -14,6 +14,21 @@ defmodule Fuzzy.Inputs do
     watering_36h_prior: 0,
   ]
 
+  def prewatering_history(history_full, forecast_full, watering_time) do
+    {latest_history, _rain, _temp} = List.last(history_full)
+    {:ok, latest_history_time, 0} = DateTime.from_iso8601(latest_history)
+
+    grab = 
+      DateTime.diff(watering_time, latest_history_time)/(60 * 60)
+      |> Kernel.round()
+        
+    grab_hist = 24 - grab
+    history = Enum.slice(history_full, (-grab_hist - 1)..-2)
+    forecast = Enum.slice(forecast_full, 0..(grab - 1))
+
+    history ++ forecast
+  end
+
   def decay_operator_score({score, set_date, now}) do
                                                     # y = mx + b straight line decay; b = 0
     slope_sign = if score > 0, do: -1, else: 1      # if score is above 0, the m will be negative
