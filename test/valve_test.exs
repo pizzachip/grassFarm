@@ -1,8 +1,8 @@
 defmodule ValveTest do
   use ExUnit.Case
-  doctest Valves.Valve
+  doctest GrassFarm.Valves.Valve
 
-  alias Valves.Valve
+  alias GrassFarm.Valves.Valve
 
   test "create a new valve" do
     assert %Valve{id: 1} ==

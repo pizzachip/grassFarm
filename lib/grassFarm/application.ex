@@ -26,7 +26,7 @@ defmodule GrassFarm.Application do
     [
       # Children that only run on the host
       # Starts a worker by calling: GrassFarm.Worker.start_link(arg)
-      # {GrassFarm.Worker, arg},
+      {PropertyTable, name: SettingsTable}
     ]
   end
 
@@ -34,7 +34,7 @@ defmodule GrassFarm.Application do
     [
       # Children for all targets except host
       # Starts a worker by calling: GrassFarm.Worker.start_link(arg)
-      # {GrassFarm.Worker, arg},
+      {PropertyTable, name: SettingsTable, persist_data_path: "/data"}
     ]
   end
 

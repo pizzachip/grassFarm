@@ -1,4 +1,4 @@
-defmodule Valves.Valve do
+defmodule GrassFarm.Valves.Valve do
 
   @type t:: %__MODULE__{
     id: integer(),

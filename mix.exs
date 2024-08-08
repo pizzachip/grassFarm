@@ -51,7 +51,6 @@ defmodule GrassFarm.MixProject do
       {:hackney, "~> 1.17"},
       {:jason, ">= 1.0.0"},
 
-
       # Allow Nerves.Runtime on host to support development, testing and CI.
       # See config/host.exs for usage.
       {:nerves_runtime, "~> 0.13.0"},
