@@ -3,14 +3,14 @@ defmodule Fuzzy.Inputs do
   @type t:: %__MODULE__{
     rain_24h_prior: float(),
     temp_24h_prior: float(),
-    operator_score: float(),
+    wetness_score: float(),
     watering_36h_prior: float()
   }
   
   defstruct [
     rain_24h_prior: 0,
     temp_24h_prior: 0,
-    operator_score: 0,
+    wetness_score: 0,
     watering_36h_prior: 0,
   ]
 
@@ -45,12 +45,16 @@ defmodule Fuzzy.Inputs do
     %Inputs{
       rain_24h_prior: rain,
       temp_24h_prior: temp,
-      operator_score: 0,
+      wetness_score: 0,
       watering_36h_prior: 0
     }
   end
 
-  def decay_operator_score({score, set_date, now}) do
+  @spec seat_wetness_score(Inputs.t(), DateTime.t()) :: Inputs.t()
+  def seat_wetness_score(fzl_inputs, watering_time) do 
+  end
+
+  def decay_wetness_score({score, set_date, now}) do
     # y = mx + b straight line decay; b = 0
     # slope_sign --> if score is above 0, the m will be negative
     # m the number of seconds in a 24 hour period# 

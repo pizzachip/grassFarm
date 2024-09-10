@@ -26,15 +26,11 @@ config :nerves_runtime,
 adapters =
   if Mix.env() == :test do
     [
-      zone_control_adapter: GrassFarm.Zones.ZoneControlAdapter.Test,
-      calendar_adapter: Sessions.CalendarAdapter.Test,
-      duration_adapter: Durations.DurationAdapter.Test
+      persist_adapter: GrassFarm.PersistAdapter.Test
     ]
   else 
     [
-      zone_control_adapter: GrassFarm.Zones.ZoneControlAdapter.Dev,
-      calendar_adapter: Sessions.CalendarAdapter.Dev,
-      duration_adapter: Durations.DurationAdapter.Dev
+      persist_adapter: GrassFarm.PersistAdapter.Dev
     ]
   end
 

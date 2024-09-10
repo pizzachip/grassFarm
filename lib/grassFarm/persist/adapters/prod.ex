@@ -1,4 +1,4 @@
-defmodule GrassFarm.PersistenceAdapter.Dev do
+defmodule GrassFarm.PersistAdapter.Prod do
   defstruct [:set_name, :configs]
   @moduledoc """
     The prod module uses PropertyTable to persist data to a file on the target.
@@ -8,13 +8,13 @@ defmodule GrassFarm.PersistenceAdapter.Dev do
     This implies that data should be saved in 'sets' but can be lists, maps, etc.
   """
   alias GrassFarm.Persist
-  alias GrassFarm.PersistenceAdapter.Dev
+  alias GrassFarm.PersistAdapter.Prod
 
   def new(adapter) do
     adapter
   end
 
-  defimpl Persist, for: Dev do
+  defimpl Persist, for: Prod do
     def local_write(adapter) do
       PropertyTable.put(SettingsTable, [adapter.set_name], adapter.configs)
       adapter
@@ -24,15 +24,22 @@ defmodule GrassFarm.PersistenceAdapter.Dev do
       PropertyTable.get(SettingsTable, [adapter.set_name])
     end
 
-    def save(adapter) do
-      case adapter.configs do
-        nil -> :error
-        _   -> :ok
-      end
+    def save(_adapter) do
+      PropertyTable.snapshot(SettingsTable)
     end
 
-    def load(adapter) do
-      adapter.configs
+    def load(_adapter) do
+      snaps = PropertyTable.get_snapshots(SettingsTable)
+
+      case snaps do
+        [] -> nil
+        _ -> snaps
+              |> List.last
+              |> Tuple.to_list
+              |> List.first
+              |> ( fn id -> PropertyTable.restore_snapshot(SettingsTable, id) end ).()
+
+      end
     end
   end
 

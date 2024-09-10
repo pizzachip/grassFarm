@@ -1,4 +1,4 @@
-defmodule GrassFarm.PersistenceAdapter.Test do
+defmodule GrassFarm.PersistAdapter.Dev do
   defstruct [:set_name, :configs]
   @moduledoc """
     The prod module uses PropertyTable to persist data to a file on the target.
@@ -7,33 +7,30 @@ defmodule GrassFarm.PersistenceAdapter.Test do
     can be any data type.
     This implies that data should be saved in 'sets' but can be lists, maps, etc.
   """
-  alias GrassFarm.Schedules.Schedule
-  alias GrassFarm.Valves.Valve
   alias GrassFarm.Persist
+  alias GrassFarm.PersistAdapter.Dev
 
   def new(adapter) do
     adapter
   end
 
-  defimpl Persist, for: Test do
-    def local_write(_adapter) do
-      :ok
+  defimpl Persist, for: Dev do
+    def local_write(adapter) do
+      PropertyTable.put(SettingsTable, [adapter.set_name], adapter.configs)
+      adapter
     end
 
     def local_read(adapter) do
-      case adapter.set_name do
-        "valves"     -> [%Valve{id: 1, gpio_pin: 10}]
-        # "schedules" -> [%Schedule{id: 1, name: "Schedule 1"}, %Schedule{id: 2, name: "Schedule 2"}]
-        _           -> []
+      PropertyTable.get(SettingsTable, [adapter.set_name])
+    end
+
+    def save(adapter) do
+      case adapter.configs do
+        nil -> :error
+        _   -> :ok
       end
     end
 
-    # Should not need in Dev
-    def save(adapter) do
-      adapter.configs
-    end
-
-    # Should not need in Dev
     def load(adapter) do
       adapter.configs
     end

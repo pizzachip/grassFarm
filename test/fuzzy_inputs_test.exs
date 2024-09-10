@@ -196,13 +196,13 @@ defmodule FuzzyInputsTest do
     ]
   end
 
-  test "calculates operator score decay" do
+  test "calculates wetness score decay" do
     now = NaiveDateTime.local_now()
     set_date1 = NaiveDateTime.add(now, -12 * 60 * 60, :second)
-    assert Inputs.decay_operator_score({100, set_date1, now}) == 50
+    assert Inputs.decay_wetness_score({100, set_date1, now}) == 50
 
     set_date2 = NaiveDateTime.add(now, -18 * 60 * 60, :second)
-    assert Inputs.decay_operator_score({100, set_date2, now}) == 25 
+    assert Inputs.decay_wetness_score({100, set_date2, now}) == 25 
   end 
 
   test "merge history and forecast based on date", context do
@@ -216,7 +216,7 @@ defmodule FuzzyInputsTest do
       %Inputs{
         rain_24h_prior: 0,
         temp_24h_prior: 31,
-        operator_score: 0,
+        wetness_score: 0,
         watering_36h_prior: 0
       }   
   end

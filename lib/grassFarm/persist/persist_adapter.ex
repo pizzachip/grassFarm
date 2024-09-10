@@ -12,5 +12,5 @@ defmodule GrassFarm.PersistAdapter do
   def save(adapter), do: Persist.save(adapter)
   def load(adapter), do: Persist.load(adapter)
 
-  defp from_env, do: Application.get_env(:grass_farmer, :persistence_adapter)
+  defp from_env, do: Application.get_env(:grassFarm, :persist_adapter)
 end
