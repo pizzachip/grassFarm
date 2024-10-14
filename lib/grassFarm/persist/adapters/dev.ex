@@ -1,4 +1,4 @@
-defmodule GrassFarm.PersistAdapter.Dev do
+defmodule Persist.PersistAdapter.Dev do
   defstruct [:set_name, :configs]
   @moduledoc """
     The prod module uses PropertyTable to persist data to a file on the target.
@@ -7,8 +7,8 @@ defmodule GrassFarm.PersistAdapter.Dev do
     can be any data type.
     This implies that data should be saved in 'sets' but can be lists, maps, etc.
   """
-  alias GrassFarm.Persist
-  alias GrassFarm.PersistAdapter.Dev
+  alias Persist.Persist
+  alias Persist.PersistAdapter.Dev
 
   def new(adapter) do
     adapter

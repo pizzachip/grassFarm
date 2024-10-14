@@ -1,8 +1,8 @@
 defmodule FuzzyInputsTest do
   use ExUnit.Case
-  doctest Fuzzy.Inputs
+  doctest FuzzyInput.Inputs
 
-  alias Fuzzy.Inputs
+  alias FuzzyInput.Inputs
 
   @watering_time ~U[2024-07-31 07:15:00Z] 
 

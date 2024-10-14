@@ -1,4 +1,4 @@
-defmodule Fuzzy.Inputs do
+defmodule FuzzyInput.Inputs do
 
   @type t:: %__MODULE__{
     rain_24h_prior: float(),
@@ -14,7 +14,7 @@ defmodule Fuzzy.Inputs do
     watering_36h_prior: 0,
   ]
 
-  alias Fuzzy.Inputs
+  alias FuzzyInput.Inputs
 
   def prewatering_history(history_full, forecast_full, watering_time) do
     {latest_history, _rain, _temp} = List.last(history_full)
@@ -50,9 +50,9 @@ defmodule Fuzzy.Inputs do
     }
   end
 
-  @spec seat_wetness_score(Inputs.t(), DateTime.t()) :: Inputs.t()
-  def seat_wetness_score(fzl_inputs, watering_time) do 
-  end
+  # @spec seat_wetness_score(Inputs.t(), DateTime.t()) :: Inputs.t()
+  # def seat_wetness_score(fzl_inputs, watering_time) do 
+  # end
 
   def decay_wetness_score({score, set_date, now}) do
     # y = mx + b straight line decay; b = 0

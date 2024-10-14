@@ -1,9 +1,6 @@
 defmodule WaterLogTest do
   use ExUnit.Case
 
-  alias GrassFarm.WaterLog
-
-
   setup_all context do
     now = DateTime.now!("Etc/UTC")
     

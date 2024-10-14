@@ -1,4 +1,4 @@
-defmodule GrassFarm.WaterLog do
+defmodule WaterLog do
 
   @type t:: %__MODULE__{
     watering_datetime: String.t(),
@@ -10,13 +10,12 @@ defmodule GrassFarm.WaterLog do
     watering_duration: 0,
   ]
 
-  alias GrassFarm.WaterLog
-  alias GrassFarm.PersistAdapter
+  alias Persist.PersistAdapter
 
 
   @spec create_log_event(DateTime.t(), integer()) :: WaterLog.t() 
   def create_log_event(time, duration) do
-    %WaterLog{
+    %__MODULE__{
       watering_datetime: DateTime.to_string(time),
       watering_duration: duration
     } 
@@ -34,9 +33,9 @@ defmodule GrassFarm.WaterLog do
     rotate_water_log(log, now, watering_activity)
   end
 
-  def update_watering_forecast(log, event, now) do
-    [] 
-  end
+  #  def update_watering_forecast(log, event, now) do
+  #    [] 
+  #  end
 
   def rotate_water_log(log, now, watering_activity) do
     log

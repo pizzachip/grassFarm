@@ -1,5 +1,5 @@
-defmodule GrassFarm.PersistAdapter do
-  alias GrassFarm.Persist
+defmodule Persist.PersistAdapter do
+  alias Persist.Persist
 
   def new(params, module \\ from_env()) do
     adapter = module.__struct__(set_name: params.set_name, configs: params.configs)
