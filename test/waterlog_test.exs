@@ -1,34 +1,34 @@
 defmodule WaterLogTest do
   use ExUnit.Case
 
-  setup_all context do
+  setup_all _context do
     now = DateTime.now!("Etc/UTC")
-    
+
     now_string = DateTime.to_string(now)
 
-    past_watering_event = 
+    past_watering_event =
       WaterLog.create_log_event(
-        DateTime.add(-79200, :seconds, now), #22 hours in the past
+        DateTime.add(now, -79200), #22 hours in the past
         12
       )
 
-    past_watering_event_2 = 
+    past_watering_event_2 =
       WaterLog.create_log_event(
-        DateTime.add(-43200, :seconds, now), #12 hours in the past
-        8 
+        DateTime.add(now, -43200), #12 hours in the past
+        8
       )
 
-    future_watering_event = 
+    future_watering_event =
       WaterLog.create_log_event(
-        DateTime.add(36000, :seconds, now), #12 hours in the future
+        DateTime.add(now, 36000), #12 hours in the future
         8
-      ) 
+      )
 
-    future_watering_event_2 = 
+    future_watering_event_2 =
       WaterLog.create_log_event(
-        DateTime.add(64800, :seconds, now), #18 hours in the future
-        12 
-      ) 
+        DateTime.add(now, 64800), #18 hours in the future
+        12
+      )
 
     [
       past_watering_event: past_watering_event,
@@ -65,10 +65,12 @@ defmodule WaterLogTest do
     assert WaterLog.update_watering_forecast(context.log, context.past_watering_event, context.now) ==
       []
 
-    assert WaterLog.update_watering_forecast(context.log, context.future_watering_event, context.now) ==
-      [ context.future_watering_event ]
+    new_log = [ context.future_watering_event ]
 
-    assert WaterLog.update_watering_forecast(context.log, context.future_watering_event_2, context.now) ==
+    assert WaterLog.update_watering_forecast(context.log, context.future_watering_event, context.now) ==
+      new_log
+
+    assert WaterLog.update_watering_forecast(new_log, context.future_watering_event_2, context.now) ==
       [ context.future_watering_event, context.future_watering_event_2 ]
   end
 

@@ -26,13 +26,13 @@ config :nerves_runtime,
 adapters =
   if Mix.env() == :test do
     [
-      persist_adapter: GrassFarm.PersistAdapter.Test
+      persist_adapter: Persist.PersistAdapter.Test
     ]
-  else 
+  else
     [
-      persist_adapter: GrassFarm.PersistAdapter.Dev
+      persist_adapter: Persist.PersistAdapter.Dev
     ]
   end
 
 config :grassFarm,
-   adapters 
+   adapters
